@@ -95,6 +95,8 @@ let eventSourceDef: EventSourceDef<ICalFeedMeta> = {
 function requestICal(url: string, successCallback: Success, failureCallback: Failure) {
   const xhr = new XMLHttpRequest()
   xhr.open('GET', url, true)
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+  xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
   xhr.onload = () => {
     if (xhr.status >= 200 && xhr.status < 400) {
       successCallback(xhr.responseText, xhr)
